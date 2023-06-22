@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DasborController;
+use App\Http\Controllers\Laporan\TransaksiPenjualanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,12 @@ Route::prefix('autentikasi')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DasborController::class, 'indeks'])->name('dasbor');
+
+    Route::prefix('laporan')->group(function () {
+        Route::name('laporan.')->group(function () {
+            Route::prefix('transaksi-penjualan')->group(function () {
+                Route::get('/', [TransaksiPenjualanController::class, 'indeks'])->name('transaksi-penjualan');
+            });
+        });
+    });
 });
