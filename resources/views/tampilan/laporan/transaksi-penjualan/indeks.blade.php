@@ -18,7 +18,7 @@
             </div>
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Filter</button>
-                <button class="btn btn-success" type="button">Ekspor</button>
+                <button class="btn btn-success" id="tombol-ekspor" type="button">Ekspor</button>
             </div>
         </form>
         <div class="card-body">
@@ -56,4 +56,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/locales/bootstrap-datepicker.id.min.js"></script>
     <script src="{{ asset('js/laporan/transaksi-penjualan/indeks.js') }}"></script>
+    <script src="{{ asset('js/laporan/transaksi-penjualan/ekspor.js') }}"></script>
 @endpush
