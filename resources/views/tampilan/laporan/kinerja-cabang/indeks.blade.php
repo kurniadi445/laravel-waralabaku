@@ -48,3 +48,6 @@
     </div>
     {{-- kartu --}}
 @endsection
+@push('js')
+    <script src="{{ asset('js/laporan/kinerja-cabang/ekspor.js') }}"></script>
+@endpush
