@@ -39,7 +39,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('master.pengguna') }}">
                 <i class="fa-user fas"></i>
                 <span>Pengguna</span>
             </a>
