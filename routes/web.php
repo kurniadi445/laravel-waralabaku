@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::name('laporan.')->group(function () {
             Route::prefix('transaksi-penjualan')->group(function () {
                 Route::get('/', [TransaksiPenjualanController::class, 'indeks'])->name('transaksi-penjualan');
+                Route::get('/ekspor', [TransaksiPenjualanController::class, 'ekspor'])->name('transaksi-penjualan.ekspor');
             });
         });
     });
