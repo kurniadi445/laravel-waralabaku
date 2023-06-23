@@ -56,8 +56,10 @@ Route::middleware('auth')->group(function () {
                 });
             });
 
-            Route::prefix('stok')->group(function () {
-                Route::get('/', [StokController::class, 'indeks'])->name('stok');
+            Route::middleware('cek-cabang')->group(function () {
+                Route::prefix('stok')->group(function () {
+                    Route::get('/', [StokController::class, 'indeks'])->name('stok');
+                });
             });
         });
     });
