@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
 
             Route::prefix('kinerja-cabang')->group(function () {
                 Route::get('/', [KinerjaCabangController::class, 'indeks'])->name('kinerja-cabang');
+                Route::get('/ekspor', [KinerjaCabangController::class, 'ekspor'])->name('kinerja-cabang.ekspor');
             });
         });
     });
