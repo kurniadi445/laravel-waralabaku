@@ -32,7 +32,7 @@
     <div class="sidebar-heading">Laporan</div>
     {{-- heading --}}
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('laporan.transaksi-penjualan') }}">
             <i class="fa-shop fas"></i>
             <span>Transaksi Penjualan</span>
         </a>
