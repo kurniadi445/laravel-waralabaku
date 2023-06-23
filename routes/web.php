@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::name('master.')->group(function () {
             Route::prefix('cabang')->group(function () {
                 Route::get('/', [CabangController::class, 'indeks'])->name('cabang');
+                Route::get('/tambah', [CabangController::class, 'tambah'])->name('cabang.tambah');
+                Route::post('/tambah', [CabangController::class, 'prosesTambah'])->name('cabang.proses-tambah');
             });
 
             Route::prefix('produk')->group(function () {
