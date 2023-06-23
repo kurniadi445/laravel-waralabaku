@@ -14,4 +14,9 @@ class ProdukRepository
 
         return $produk->get();
     }
+
+    public function tambah($nilai): void
+    {
+        DB::table('produk')->insert($nilai);
+    }
 }
