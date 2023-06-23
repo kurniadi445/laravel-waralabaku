@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
                 Route::get('/', [ProdukController::class, 'indeks'])->name('produk');
                 Route::get('/tambah', [ProdukController::class, 'tambah'])->name('produk.tambah');
                 Route::post('/tambah', [ProdukController::class, 'prosesTambah'])->name('produk.proses-tambah');
+                Route::get('/edit/{uuid}', [ProdukController::class, 'edit'])->whereUuid('uuid')->name('produk.edit');
+                Route::put('/edit/{uuid}', [ProdukController::class, 'prosesEdit'])->whereUuid('uuid')->name('produk.proses-edit');
                 Route::delete('/hapus/{uuid}', [ProdukController::class, 'hapus'])->whereUuid('uuid')->name('produk.hapus');
             });
 
