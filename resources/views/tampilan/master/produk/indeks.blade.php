@@ -27,7 +27,7 @@
                             <td>{{ $p->nama_produk }}</td>
                             <td class="text-end">{{ $p->harga }}</td>
                             <td class="text-center">
-                                <span class="badge badge-warning"><a class="badge-link text-white" href="#">Edit</a></span>
+                                <span class="badge badge-warning"><a class="badge-link text-white" href="{{ route('master.produk.edit', ['uuid' => $p->uuid_teks]) }}">Edit</a></span>
                                 <span class="badge badge-danger"><a class="badge-link text-white tombol-hapus" data-uuid="{{ $p->uuid_teks }}" href="#">Hapus</a></span>
                             </td>
                         </tr>
