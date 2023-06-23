@@ -11,6 +11,18 @@
     <hr class="sidebar-divider">
     {{-- pembatas --}}
     {{-- heading --}}
+    <div class="sidebar-heading">Dasbor</div>
+    {{-- heading --}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('dasbor') }}">
+            <i class="fa-tachometer-alt fas"></i>
+            <span>Dasbor</span>
+        </a>
+    </li>
+    {{-- pembatas --}}
+    <hr class="sidebar-divider">
+    {{-- pembatas --}}
+    {{-- heading --}}
     <div class="sidebar-heading">Master</div>
     {{-- heading --}}
     <li class="nav-item">
