@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DasborController;
 use App\Http\Controllers\Laporan\TransaksiPenjualanController;
+use App\Http\Controllers\Master\ProdukController;
 use App\Http\Controllers\Master\StokController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('master')->group(function () {
         Route::name('master.')->group(function () {
+            Route::prefix('produk')->group(function () {
+                Route::get('/', [ProdukController::class, 'indeks'])->name('produk');
+            });
+
             Route::prefix('stok')->group(function () {
                 Route::get('/', [StokController::class, 'indeks'])->name('stok');
             });
