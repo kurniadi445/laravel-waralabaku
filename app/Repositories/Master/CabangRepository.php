@@ -14,4 +14,9 @@ class CabangRepository
 
         return $cabang->get();
     }
+
+    public function tambah($nilai): void
+    {
+        DB::table('cabang')->insert($nilai);
+    }
 }

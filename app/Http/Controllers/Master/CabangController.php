@@ -7,6 +7,10 @@ use App\Repositories\Master\CabangRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CabangController extends Controller
 {
@@ -23,6 +27,30 @@ class CabangController extends Controller
 
         return view('tampilan.master.cabang.indeks', [
             'cabang' => $cabang
+        ]);
+    }
+
+    public function tambah(): View|\Illuminate\Foundation\Application|Factory|Application
+    {
+        return view('tampilan.master.cabang.tambah');
+    }
+
+    public function prosesTambah(Request $request): JsonResponse
+    {
+        $idPengguna = Auth::user()->getAuthIdentifier();
+        $uuid = hex2bin(str_replace('-', '', Str::uuid()));
+        $namaCabang = $request->input('nama-cabang');
+        $alamat = $request->input('alamat');
+
+        $this->cabangRepository->tambah([
+            'id_pengguna' => $idPengguna,
+            'uuid' => $uuid,
+            'nama_cabang' => $namaCabang,
+            'alamat' => $alamat
+        ]);
+
+        return response()->json([
+            'berhasil' => true
         ]);
     }
 }
