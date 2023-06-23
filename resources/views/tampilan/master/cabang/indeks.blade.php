@@ -2,7 +2,7 @@
 @section('judul', 'Cabang')
 @section('topbar', 'Cabang')
 @section('konten')
-    <a class="btn btn-success my-4" href="#"><i class="fa-plus fas"></i> Tambah</a>
+    <a class="btn btn-success my-4" href="{{ route('master.cabang.tambah') }}"><i class="fa-plus fas"></i> Tambah</a>
     {{-- kartu --}}
     <div class="card mb-4 shadow">
         <div class="card-body">
