@@ -25,18 +25,39 @@
     {{-- heading --}}
     <div class="sidebar-heading">Master</div>
     {{-- heading --}}
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('master.stok') }}">
-            <i class="fa-box fas"></i>
-            <span>Stok</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fa-money-bill-alt far"></i>
-            <span>Transaksi</span>
-        </a>
-    </li>
+    @if ($level === 'Admin')
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-shop fas"></i>
+                <span>Cabang</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('master.produk') }}">
+                <i class="fa-box fas"></i>
+                <span>Produk</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-user fas"></i>
+                <span>Pengguna</span>
+            </a>
+        </li>
+    @else
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('master.stok') }}">
+                <i class="fa-box fas"></i>
+                <span>Stok</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-money-bill-alt far"></i>
+                <span>Transaksi</span>
+            </a>
+        </li>
+    @endif
     {{-- pembatas --}}
     <hr class="sidebar-divider">
     {{-- pembatas --}}
@@ -49,4 +70,12 @@
             <span>Transaksi Penjualan</span>
         </a>
     </li>
+    @if ($level === 'Admin')
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-money-bill-alt far"></i>
+                <span>Kinerja Cabang</span>
+            </a>
+        </li>
+    @endif
 </ul>
