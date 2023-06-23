@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DasborController;
 use App\Http\Controllers\Laporan\TransaksiPenjualanController;
+use App\Http\Controllers\Master\PenggunaController;
 use App\Http\Controllers\Master\ProdukController;
 use App\Http\Controllers\Master\StokController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,10 @@ Route::middleware('auth')->group(function () {
                 Route::get('/edit/{uuid}', [ProdukController::class, 'edit'])->whereUuid('uuid')->name('produk.edit');
                 Route::put('/edit/{uuid}', [ProdukController::class, 'prosesEdit'])->whereUuid('uuid')->name('produk.proses-edit');
                 Route::delete('/hapus/{uuid}', [ProdukController::class, 'hapus'])->whereUuid('uuid')->name('produk.hapus');
+            });
+
+            Route::prefix('pengguna')->group(function () {
+                Route::get('/', [PenggunaController::class, 'indeks'])->name('pengguna');
             });
 
             Route::prefix('stok')->group(function () {
