@@ -27,7 +27,7 @@
     {{-- heading --}}
     @if ($level === 'Admin')
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('master.cabang') }}">
                 <i class="fa-shop fas"></i>
                 <span>Cabang</span>
             </a>
