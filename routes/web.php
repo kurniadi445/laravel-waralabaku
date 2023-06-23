@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
         Route::name('master.')->group(function () {
             Route::prefix('produk')->group(function () {
                 Route::get('/', [ProdukController::class, 'indeks'])->name('produk');
+                Route::get('/tambah', [ProdukController::class, 'tambah'])->name('produk.tambah');
+                Route::post('/tambah', [ProdukController::class, 'prosesTambah'])->name('produk.proses-tambah');
             });
 
             Route::prefix('stok')->group(function () {
