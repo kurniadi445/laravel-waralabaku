@@ -72,7 +72,7 @@
     </li>
     @if ($level === 'Admin')
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('laporan.kinerja-cabang') }}">
                 <i class="fa-money-bill-alt far"></i>
                 <span>Kinerja Cabang</span>
             </a>
