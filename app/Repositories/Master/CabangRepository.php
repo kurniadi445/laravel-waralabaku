@@ -11,6 +11,7 @@ class CabangRepository
     {
         $cabang = DB::table('cabang')->selectRaw('row_number() over (order by id_cabang desc) no');
         $cabang = $cabang->addSelect('uuid_teks', 'nama_cabang', 'alamat');
+        $cabang = $cabang->whereNull('tanggal_dihapus');
 
         return $cabang->get();
     }
@@ -18,6 +19,7 @@ class CabangRepository
     public function cariSatuBerdasarkanUUID($uuid): object|null
     {
         $cabang = DB::table('cabang')->where('uuid_teks', '=', $uuid);
+        $cabang = $cabang->whereNull('tanggal_dihapus');
 
         return $cabang->first();
     }
@@ -30,6 +32,15 @@ class CabangRepository
     public function edit($uuid, $nilai): void
     {
         $cabang = DB::table('cabang')->where('uuid_teks', '=', $uuid);
+        $cabang = $cabang->whereNull('tanggal_dihapus');
+
+        $cabang->update($nilai);
+    }
+
+    public function hapus($uuid, $nilai): void
+    {
+        $cabang = DB::table('cabang')->where('uuid_teks', '=', $uuid);
+        $cabang = $cabang->whereNull('tanggal_dihapus');
 
         $cabang->update($nilai);
     }

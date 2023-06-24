@@ -89,4 +89,25 @@ class CabangController extends Controller
             'berhasil' => false
         ]);
     }
+
+    public function hapus($uuid): JsonResponse
+    {
+        $cabang = $this->cabangRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($cabang) {
+            $tanggal = date('Y-m-d H:i:s');
+
+            $this->cabangRepository->hapus($uuid, [
+                'tanggal_dihapus' => $tanggal
+            ]);
+
+            return response()->json([
+                'berhasil' => true
+            ]);
+        }
+
+        return response()->json([
+            'berhasil' => false
+        ]);
+    }
 }
