@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Master;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +30,14 @@ class ProdukRepository
     public function tambah($nilai): void
     {
         DB::table('produk')->insert($nilai);
+    }
+
+    public function edit($uuid, $nilai): void
+    {
+        $produk = DB::table('produk')->where('uuid_teks', '=', $uuid);
+        $produk = $produk->whereNull('tanggal_dihapus');
+
+        $produk->update($nilai);
     }
 
     public function hapus($uuid, $nilai): void

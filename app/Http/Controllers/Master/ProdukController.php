@@ -51,6 +51,41 @@ class ProdukController extends Controller
         ]);
     }
 
+    public function edit($uuid)
+    {
+        $produk = $this->produkRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($produk) {
+            return view('tampilan.master.produk.edit', [
+                'produk' => $produk
+            ]);
+        }
+
+        abort(404);
+    }
+
+    public function prosesEdit(Request $request, $uuid): JsonResponse
+    {
+        $produk = $this->produkRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($produk) {
+            $namaProduk = $request->input('nama-produk');
+            $harga = $request->input('harga');
+
+            $this->produkRepository->edit($uuid, [
+                'nama_produk' => $namaProduk,
+                'harga' => $harga
+            ]);
+
+            return response()->json([
+                'berhasil' => true
+            ]);
+        }
+
+        return response()->json([
+            'berhasil' => false
+        ]);
+    }
     public function hapus($uuid): JsonResponse
     {
         $produk = $this->produkRepository->cariSatuBerdasarkanUUID($uuid);
