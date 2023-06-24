@@ -50,4 +50,25 @@ class ProdukController extends Controller
             'berhasil' => true
         ]);
     }
+
+    public function hapus($uuid): JsonResponse
+    {
+        $produk = $this->produkRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($produk) {
+            $tanggal = date('Y-m-d H:i:s');
+
+            $this->produkRepository->hapus($uuid, [
+                'tanggal_dihapus' => $tanggal
+            ]);
+
+            return response()->json([
+                'berhasil' => true
+            ]);
+        }
+
+        return response()->json([
+            'berhasil' => false
+        ]);
+    }
 }
