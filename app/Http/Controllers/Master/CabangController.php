@@ -53,4 +53,40 @@ class CabangController extends Controller
             'berhasil' => true
         ]);
     }
+
+    public function edit($uuid)
+    {
+        $cabang = $this->cabangRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($cabang) {
+            return view('tampilan.master.cabang.edit', [
+                'cabang' => $cabang
+            ]);
+        }
+
+        abort(404);
+    }
+
+    public function prosesEdit(Request $request, $uuid): JsonResponse
+    {
+        $cabang = $this->cabangRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($cabang) {
+            $namaCabang = $request->input('nama-cabang');
+            $alamat = $request->input('alamat');
+
+            $this->cabangRepository->edit($uuid, [
+                'nama_cabang' => $namaCabang,
+                'alamat' => $alamat
+            ]);
+
+            return response()->json([
+                'berhasil' => true
+            ]);
+        }
+
+        return response()->json([
+            'berhasil' => false
+        ]);
+    }
 }
