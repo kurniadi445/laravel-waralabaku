@@ -24,7 +24,7 @@
                             <td>{{ $c->nama_cabang }}</td>
                             <td>{{ $c->alamat }}</td>
                             <td class="text-center">
-                                <span class="badge badge-warning"><a class="badge-link text-white" href="#">Edit</a></span>
+                                <span class="badge badge-warning"><a class="badge-link text-white" href="{{ route('master.cabang.edit', ['uuid' => $c->uuid_teks]) }}">Edit</a></span>
                                 <span class="badge badge-danger"><a class="badge-link text-white" href="#">Hapus</a></span>
                             </td>
                         </tr>
