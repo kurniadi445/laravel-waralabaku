@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
                     Route::get('/', [CabangController::class, 'indeks'])->name('cabang');
                     Route::get('/tambah', [CabangController::class, 'tambah'])->name('cabang.tambah');
                     Route::post('/tambah', [CabangController::class, 'prosesTambah'])->name('cabang.proses-tambah');
+                    Route::get('/edit/{uuid}', [CabangController::class, 'edit'])->whereUuid('uuid')->name('cabang.edit');
+                    Route::put('/edit/{uuid}', [CabangController::class, 'prosesEdit'])->whereUuid('uuid')->name('cabang.proses-edit');
                 });
 
                 Route::prefix('produk')->group(function () {
