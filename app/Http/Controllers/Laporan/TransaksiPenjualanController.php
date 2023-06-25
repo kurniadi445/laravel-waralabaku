@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiPenjualanController extends Controller
 {
@@ -20,12 +22,27 @@ class TransaksiPenjualanController extends Controller
         $this->transaksiPenjualanRepository = $transaksiPenjualanRepository;
     }
 
-    public function indeks(Request $request): View|\Illuminate\Foundation\Application|Factory|Application
+    public function getSemua(Request $request): Collection
     {
+        $pengguna = Auth::user();
+
+        $level = $pengguna->{'level'};
+
+        if ($level === 'Cabang') {
+            $idPengguna = $pengguna->getAuthIdentifier();
+        } else {
+            $idPengguna = null;
+        }
+
         $tanggalMulai = $request->query('tanggal-mulai');
         $tanggalAkhir = $request->query('tanggal-akhir');
 
-        $transaksi = $this->transaksiPenjualanRepository->cariSemua($tanggalMulai, $tanggalAkhir);
+        return $this->transaksiPenjualanRepository->cariSemua($idPengguna, $tanggalMulai, $tanggalAkhir);
+    }
+
+    public function indeks(Request $request): View|\Illuminate\Foundation\Application|Factory|Application
+    {
+        $transaksi = $this->getSemua($request);
 
         return view('tampilan.laporan.transaksi-penjualan.indeks', [
             'transaksi' => $transaksi
@@ -34,10 +51,7 @@ class TransaksiPenjualanController extends Controller
 
     public function ekspor(Request $request): Response
     {
-        $tanggalMulai = $request->query('tanggal-mulai');
-        $tanggalAkhir = $request->query('tanggal-akhir');
-
-        $transaksi = $this->transaksiPenjualanRepository->cariSemua($tanggalMulai, $tanggalAkhir);
+        $transaksi = $this->getSemua($request);
 
         $pdf = Pdf::loadView('tampilan.laporan.transaksi-penjualan.ekspor', [
             'transaksi' => $transaksi
