@@ -31,6 +31,7 @@ Route::prefix('autentikasi')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DasborController::class, 'indeks'])->name('dasbor');
+    Route::get('/data', [DasborController::class, 'data'])->name('dasbor.data');
 
     Route::prefix('master')->group(function () {
         Route::name('master.')->group(function () {
