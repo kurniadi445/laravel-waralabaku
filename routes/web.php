@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/', [ProdukController::class, 'indeks'])->name('produk');
                 Route::get('/tambah', [ProdukController::class, 'tambah'])->name('produk.tambah');
                 Route::post('/tambah', [ProdukController::class, 'prosesTambah'])->name('produk.proses-tambah');
+                Route::delete('/hapus/{uuid}', [ProdukController::class, 'hapus'])->whereUuid('uuid')->name('produk.hapus');
             });
 
             Route::prefix('stok')->group(function () {
