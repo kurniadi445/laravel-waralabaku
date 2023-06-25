@@ -14,7 +14,7 @@
     <div class="sidebar-heading">Master</div>
     {{-- heading --}}
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('master.stok') }}">
             <i class="fa-box fas"></i>
             <span>Stok</span>
         </a>
