@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DasborController;
 use App\Http\Controllers\Laporan\TransaksiPenjualanController;
+use App\Http\Controllers\Master\StokController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,14 @@ Route::prefix('autentikasi')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DasborController::class, 'indeks'])->name('dasbor');
+
+    Route::prefix('master')->group(function () {
+        Route::name('master.')->group(function () {
+            Route::prefix('stok')->group(function () {
+                Route::get('/', [StokController::class, 'indeks'])->name('stok');
+            });
+        });
+    });
 
     Route::prefix('laporan')->group(function () {
         Route::name('laporan.')->group(function () {
