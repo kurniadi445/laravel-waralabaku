@@ -26,7 +26,7 @@ class StokRepository
     public function cariSemua($idPengguna, $cari = null): Collection
     {
         $stok = DB::table('produk')->selectRaw('row_number() over (order by produk.id_produk desc) no');
-        $stok = $stok->addSelect('nama_produk', DB::raw('ifnull(format(stok, 0), 0) as stok'));
+        $stok = $stok->addSelect('uuid_teks', 'nama_produk', DB::raw('ifnull(format(stok, 0), 0) as stok'));
         $stok = $this->leftJoinStokCabang($stok, $idPengguna);
 
         if ($cari) {
@@ -34,5 +34,29 @@ class StokRepository
         }
 
         return $stok->get();
+    }
+
+    public function edit($uuid, $idPengguna, $stok): void
+    {
+        DB::transaction(function () use ($uuid, $idPengguna, $stok) {
+            $cabang = DB::table('cabang')->where('id_pengguna', '=', $idPengguna);
+            $cabang = $cabang->whereNull('tanggal_dihapus');
+            $cabang = $cabang->first();
+
+            $idCabang = $cabang->id_cabang;
+
+            $produk = DB::table('produk')->where('uuid_teks', '=', $uuid);
+            $produk = $produk->whereNull('tanggal_dihapus');
+            $produk = $produk->first();
+
+            $idProduk = $produk->id_produk;
+
+            DB::table('stok_cabang')->updateOrInsert([
+                'id_cabang' => $idCabang,
+                'id_produk' => $idProduk
+            ], [
+                'stok' => $stok
+            ]);
+        });
     }
 }
