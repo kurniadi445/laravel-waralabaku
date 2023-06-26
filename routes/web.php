@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
             Route::middleware('cek-cabang')->group(function () {
                 Route::prefix('stok')->group(function () {
                     Route::get('/', [StokController::class, 'indeks'])->name('stok');
+                    Route::put('/', [StokController::class, 'edit'])->name('stok.edit');
                 });
 
                 Route::prefix('transaksi')->group(function () {
