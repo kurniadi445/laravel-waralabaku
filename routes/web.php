@@ -8,6 +8,7 @@ use App\Http\Controllers\Master\CabangController;
 use App\Http\Controllers\Master\PenggunaController;
 use App\Http\Controllers\Master\ProdukController;
 use App\Http\Controllers\Master\StokController;
+use App\Http\Controllers\Master\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,6 +63,12 @@ Route::middleware('auth')->group(function () {
             Route::middleware('cek-cabang')->group(function () {
                 Route::prefix('stok')->group(function () {
                     Route::get('/', [StokController::class, 'indeks'])->name('stok');
+                });
+
+                Route::prefix('transaksi')->group(function () {
+                    Route::get('/', [TransaksiController::class, 'indeks'])->name('transaksi');
+                    Route::get('/data', [TransaksiController::class, 'data'])->name('transaksi.data');
+                    Route::post('/', [TransaksiController::class, 'bayar'])->name('transaksi.bayar');
                 });
             });
         });
