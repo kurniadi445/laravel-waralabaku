@@ -1,4 +1,7 @@
 @extends('struktur.dasar')
+@push('meta')
+    <meta content="{{ csrf_token() }}" name="token-csrf">
+@endpush
 @section('judul', 'Stok')
 @section('topbar', 'Stok')
 @section('konten')
@@ -31,7 +34,7 @@
                             <td>{{ $s->nama_produk }}</td>
                             <td class="text-end">{{ $s->stok }}</td>
                             <td class="text-center">
-                                <span class="badge badge-warning"><a class="badge-link text-white" href="#">Edit</a></span>
+                                <span class="badge badge-warning"><a class="badge-link text-white tombol-edit" data-uuid="{{ $s->uuid_teks }}" href="#">Edit</a></span>
                             </td>
                         </tr>
                     @empty
@@ -47,3 +50,7 @@
     </div>
     {{-- kartu --}}
 @endsection
+@push('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="{{ asset('js/master/stok/edit.js') }}"></script>
+@endpush
