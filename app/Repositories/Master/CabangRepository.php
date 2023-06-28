@@ -16,12 +16,17 @@ class CabangRepository
         return $cabang->get();
     }
 
-    public function cariSatuBerdasarkanUUID($uuid): object|null
+    public function cariSatuBerdasarkanUUID($uuid, $kolom = ['*']): object|null
     {
         $cabang = DB::table('cabang')->where('uuid_teks', '=', $uuid);
         $cabang = $cabang->whereNull('tanggal_dihapus');
 
-        return $cabang->first();
+        return $cabang->first($kolom);
+    }
+
+    public function editLokasi($uuid, $garisLintang, $garisBujur): void
+    {
+        DB::select('call p_edit_lokasi_cabang(?, ?, ?)', [$uuid, $garisLintang, $garisBujur]);
     }
 
     public function tambah($nilai): void

@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CabangController extends Controller
@@ -27,6 +28,53 @@ class CabangController extends Controller
 
         return view('tampilan.master.cabang.indeks', [
             'cabang' => $cabang
+        ]);
+    }
+
+    public function lokasi($uuid)
+    {
+        $cabang = $this->cabangRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($cabang) {
+            return view('tampilan.master.cabang.lokasi', [
+                'cabang' => $cabang
+            ]);
+        }
+
+        abort(404);
+    }
+
+    public function dataLokasi($uuid)
+    {
+        $cabang = $this->cabangRepository->cariSatuBerdasarkanUUID($uuid, [
+            DB::raw('st_x(koordinat) garis_bujur'),
+            DB::raw('st_y(koordinat) garis_lintang')
+        ]);
+
+        if ($cabang) {
+            return response()->json($cabang);
+        }
+
+        abort(404);
+    }
+
+    public function editLokasi(Request $request, $uuid): JsonResponse
+    {
+        $cabang = $this->cabangRepository->cariSatuBerdasarkanUUID($uuid);
+
+        if ($cabang) {
+            $garisBujur = sprintf('%.7f', $request->input('garis-bujur'));
+            $garisLintang = sprintf('%.7f', $request->input('garis-lintang'));
+
+            $this->cabangRepository->editLokasi($uuid, $garisBujur, $garisLintang);
+
+            return response()->json([
+                'berhasil' => true
+            ]);
+        }
+
+        return response()->json([
+            'berhasil' => false
         ]);
     }
 
