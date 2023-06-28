@@ -39,6 +39,9 @@ Route::middleware('auth')->group(function () {
             Route::middleware('cek-admin')->group(function () {
                 Route::prefix('cabang')->group(function () {
                     Route::get('/', [CabangController::class, 'indeks'])->name('cabang');
+                    Route::get('/lokasi/{uuid}', [CabangController::class, 'lokasi'])->whereUuid('uuid')->name('cabang.lokasi');
+                    Route::get('/lokasi/{uuid}/data', [CabangController::class, 'dataLokasi'])->whereUuid('uuid')->name('cabang.lokasi.data');
+                    Route::post('/lokasi/{uuid}', [CabangController::class, 'editLokasi'])->whereUuid('uuid')->name('cabang.lokasi.edit');
                     Route::get('/tambah', [CabangController::class, 'tambah'])->name('cabang.tambah');
                     Route::post('/tambah', [CabangController::class, 'prosesTambah'])->name('cabang.proses-tambah');
                     Route::get('/edit/{uuid}', [CabangController::class, 'edit'])->whereUuid('uuid')->name('cabang.edit');
