@@ -60,10 +60,14 @@ class DasborController extends Controller
             $ringkasanPendapatan = $this->dasborRepository->ringkasanPendapatan($idPengguna);
 
             return response()->json($ringkasanPendapatan);
+        } elseif ($tipe === 'sumber pendapatan') {
+            $sumberPendapatan = $this->dasborRepository->sumberPendapatan($idPengguna);
+
+            return response()->json($sumberPendapatan);
         }
 
-        $sumberPendapatan = $this->dasborRepository->sumberPendapatan($idPengguna);
+        $lokasiCabang = $this->dasborRepository->lokasiCabang($idPengguna);
 
-        return response()->json($sumberPendapatan);
+        return response()->json($lokasiCabang);
     }
 }

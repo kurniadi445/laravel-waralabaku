@@ -1,5 +1,8 @@
 @extends('struktur.dasar')
 @section('judul', 'Dasbor')
+@push('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" rel="stylesheet">
+@endpush
 @section('topbar', 'Dasbor')
 @section('konten')
     <div class="py-4 row">
@@ -54,7 +57,7 @@
             </div>
             {{-- kartu --}}
         </div>
-        <div class="col-lg-7 col-xl-8 mb-3 mb-lg-0">
+        <div class="col-lg-7 col-xl-8 mb-3">
             {{-- kartu --}}
             <div class="card shadow">
                 <div class="card-header">
@@ -68,7 +71,7 @@
             </div>
             {{-- kartu --}}
         </div>
-        <div class="col-lg-5 col-xl-4">
+        <div class="col-lg-5 col-xl-4 mb-3 mb-lg-0">
             {{-- kartu --}}
             <div class="card shadow">
                 <div class="card-header">
@@ -82,11 +85,27 @@
             </div>
             {{-- kartu --}}
         </div>
+        <div class="col-12">
+            {{-- kartu --}}
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="fw-bold mb-0 text-primary">Lokasi Cabang</h6>
+                </div>
+                <div class="card-body">
+                    <div class="border">
+                        <div id="lokasi-cabang" style="height: 400px"></div>
+                    </div>
+                </div>
+            </div>
+            {{-- kartu --}}
+        </div>
     </div>
 @endsection
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('js/dasbor/ringkasan-pendapatan.js') }}"></script>
     <script src="{{ asset('js/dasbor/sumber-pendapatan.js') }}"></script>
+    <script src="{{ asset('js/dasbor/lokasi-cabang.js') }}"></script>
 @endpush

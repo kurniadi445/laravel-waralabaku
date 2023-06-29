@@ -61,4 +61,17 @@ class DasborRepository
 
         return $sumberPendapatan->get();
     }
+
+    public function lokasiCabang($idPengguna = null): Collection
+    {
+        $lokasiCabang = DB::table('cabang')->select('nama_cabang');
+        $lokasiCabang = $lokasiCabang->addSelect(DB::raw('st_x(koordinat) garis_bujur'));
+        $lokasiCabang = $lokasiCabang->addSelect(DB::raw('st_y(koordinat) garis_lintang'));
+
+        if ($idPengguna) {
+            $lokasiCabang = $lokasiCabang->where('id_pengguna', '=', $idPengguna);
+        }
+
+        return $lokasiCabang->get();
+    }
 }
