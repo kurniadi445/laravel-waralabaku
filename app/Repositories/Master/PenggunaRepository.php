@@ -16,4 +16,9 @@ class PenggunaRepository
 
         return $pengguna->get();
     }
+
+    public function tambah($nilai): void
+    {
+        DB::table('pengguna')->insert($nilai);
+    }
 }
