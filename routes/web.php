@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
 
                 Route::prefix('pengguna')->group(function () {
                     Route::get('/', [PenggunaController::class, 'indeks'])->name('pengguna');
+                    Route::get('/tambah', [PenggunaController::class, 'tambah'])->name('pengguna.tambah');
+                    Route::post('/tambah', [PenggunaController::class, 'prosesTambah'])->name('pengguna.proses-tambah');
                 });
             });
 
