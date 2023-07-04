@@ -61,4 +61,5 @@
 @endsection
 @push('js')
     <script src="{{ asset('js/laporan/penjualan-produk/indeks.js') }}"></script>
+    <script src="{{ asset('js/laporan/penjualan-produk/ekspor.js') }}"></script>
 @endpush
