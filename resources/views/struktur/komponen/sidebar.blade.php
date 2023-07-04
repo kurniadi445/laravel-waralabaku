@@ -78,4 +78,10 @@
             </a>
         </li>
     @endif
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('laporan.penjualan-produk') }}">
+            <i class="fa-box-open fas"></i>
+            <span>Penjualan Produk</span>
+        </a>
+    </li>
 </ul>
