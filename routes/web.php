@@ -98,6 +98,7 @@ Route::middleware('auth')->group(function () {
 
             Route::prefix('penjualan-produk')->group(function () {
                 Route::get('/', [PenjualanProdukController::class, 'indeks'])->name('penjualan-produk');
+                Route::get('/ekspor', [PenjualanProdukController::class, 'ekspor'])->name('penjualan-produk.ekspor');
             });
         });
     });
