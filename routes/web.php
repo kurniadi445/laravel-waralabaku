@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DasborController;
 use App\Http\Controllers\Laporan\KinerjaCabangController;
+use App\Http\Controllers\Laporan\PenjualanProdukController;
 use App\Http\Controllers\Laporan\TransaksiPenjualanController;
 use App\Http\Controllers\Master\CabangController;
 use App\Http\Controllers\Master\PenggunaController;
@@ -93,6 +94,10 @@ Route::middleware('auth')->group(function () {
                     Route::get('/', [KinerjaCabangController::class, 'indeks'])->name('kinerja-cabang');
                     Route::get('/ekspor', [KinerjaCabangController::class, 'ekspor'])->name('kinerja-cabang.ekspor');
                 });
+            });
+
+            Route::prefix('penjualan-produk')->group(function () {
+                Route::get('/', [PenjualanProdukController::class, 'indeks'])->name('penjualan-produk');
             });
         });
     });
