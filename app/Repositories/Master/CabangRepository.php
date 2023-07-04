@@ -16,6 +16,16 @@ class CabangRepository
         return $cabang->get();
     }
 
+    public function cariSemuaBerdasarkanNamaCabang($namaCabang): Collection
+    {
+        $cabang = DB::table('cabang')->selectRaw('row_number() over (order by nama_cabang) no');
+        $cabang = $cabang->addSelect('uuid_teks', 'nama_cabang');
+        $cabang = $cabang->where('nama_cabang', 'like', sprintf('%%%s%%', $namaCabang));
+        $cabang = $cabang->whereNull('tanggal_dihapus');
+
+        return $cabang->get();
+    }
+
     public function cariSatuBerdasarkanUUID($uuid, $kolom = ['*']): object|null
     {
         $cabang = DB::table('cabang')->where('uuid_teks', '=', $uuid);

@@ -17,8 +17,44 @@ class PenggunaRepository
         return $pengguna->get();
     }
 
-    public function tambah($nilai): void
+    public function tambah($pengguna, $connectCabang = null): void
     {
-        DB::table('pengguna')->insert($nilai);
+        $level = $pengguna['level'];
+
+        if ($level === 'Pemilik' && count($connectCabang) > 0) {
+            DB::transaction(function () use ($pengguna, $connectCabang) {
+                $idPengguna = DB::table('pengguna')->insertGetId($pengguna);
+
+                $cabang = DB::table('cabang')->whereIn('uuid_teks', $connectCabang);
+                $cabang = $cabang->whereNull('tanggal_dihapus');
+                $cabang = $cabang->get();
+
+                $nilai = [];
+
+                foreach ($cabang as $c) {
+                    $idCabang = $c->id_cabang;
+
+                    $nilai[] = [
+                        'id_pengguna' => $idPengguna,
+                        'id_cabang' => $idCabang
+                    ];
+                }
+
+                DB::table('cabang_pemilik')->insert($nilai);
+            });
+        } elseif ($level === 'Cabang' && count($connectCabang) === 1) {
+            DB::transaction(function () use ($pengguna, $connectCabang) {
+                $idPengguna = DB::table('pengguna')->insertGetId($pengguna);
+
+                $cabang = DB::table('cabang')->where('uuid_teks', '=', $connectCabang[0]);
+                $cabang = $cabang->whereNull('tanggal_dihapus');
+
+                $cabang->update([
+                    'id_pengguna' => $idPengguna
+                ]);
+            });
+        } else {
+            DB::table('pengguna')->insert($pengguna);
+        }
     }
 }

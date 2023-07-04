@@ -1,9 +1,17 @@
 'use strict';
 
+let modalConnectCabang;
+
 $(function () {
     const formulirTambahPengguna = $('form[name="tambah-pengguna"]');
 
+    const tombolConnectCabang = $('#tombol-connect-cabang');
+
     const tombolBatal = $('#tombol-batal');
+
+    modalConnectCabang = new bootstrap.Modal(document.getElementById('modal-connect-cabang'));
+
+    const tombolTutup = $('#tombol-tutup');
 
     formulirTambahPengguna.on('submit', function (objekEvent) {
         objekEvent.preventDefault();
@@ -21,7 +29,8 @@ $(function () {
                 'kata-sandi': kataSandi,
                 'nama-depan': namaDepan,
                 'nama-belakang': namaBelakang,
-                'level': level
+                'level': level,
+                'connect-cabang': connectCabang
             },
             error: function () {
                 swal({
@@ -56,7 +65,15 @@ $(function () {
         });
     });
 
+    tombolConnectCabang.on('click', function () {
+        modalConnectCabang.show();
+    });
+
     tombolBatal.on('click', function () {
         document.location.assign(`${document.location.origin}/master/pengguna`);
+    });
+
+    tombolTutup.on('click', function () {
+        modalConnectCabang.hide();
     });
 });
