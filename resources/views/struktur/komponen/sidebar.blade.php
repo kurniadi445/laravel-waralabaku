@@ -22,9 +22,11 @@
     {{-- pembatas --}}
     <hr class="sidebar-divider">
     {{-- pembatas --}}
-    {{-- heading --}}
-    <div class="sidebar-heading">Master</div>
-    {{-- heading --}}
+    @if (in_array($level, ['Admin', 'Cabang']))
+        {{-- heading --}}
+        <div class="sidebar-heading">Master</div>
+        {{-- heading --}}
+    @endif
     @if ($level === 'Admin')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('master.cabang') }}">
@@ -44,7 +46,7 @@
                 <span>Pengguna</span>
             </a>
         </li>
-    @else
+    @elseif ($level === 'Cabang')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('master.stok') }}">
                 <i class="fa-box fas"></i>
@@ -70,7 +72,21 @@
             <span>Transaksi Penjualan</span>
         </a>
     </li>
-    @if ($level === 'Admin')
+    @if ($level === 'Pemilik')
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-box fas"></i>
+                <span>Daftar Stok</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-boxes fas"></i>
+                <span>Daftar Cabang</span>
+            </a>
+        </li>
+    @endif
+    @if (in_array($level, ['Admin', 'Pemilik']))
         <li class="nav-item">
             <a class="nav-link" href="{{ route('laporan.kinerja-cabang') }}">
                 <i class="fa-money-bill-alt far"></i>
