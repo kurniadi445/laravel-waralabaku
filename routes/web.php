@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DasborController;
+use App\Http\Controllers\Laporan\DaftarCabangController;
 use App\Http\Controllers\Laporan\KinerjaCabangController;
 use App\Http\Controllers\Laporan\PenjualanProdukController;
 use App\Http\Controllers\Laporan\TransaksiPenjualanController;
@@ -87,6 +88,12 @@ Route::middleware('auth')->group(function () {
             Route::prefix('transaksi-penjualan')->group(function () {
                 Route::get('/', [TransaksiPenjualanController::class, 'indeks'])->name('transaksi-penjualan');
                 Route::get('/ekspor', [TransaksiPenjualanController::class, 'ekspor'])->name('transaksi-penjualan.ekspor');
+            });
+
+            Route::middleware('cek-pemilik')->group(function () {
+                Route::prefix('daftar-cabang')->group(function () {
+                    Route::get('/', [DaftarCabangController::class, 'indeks'])->name('daftar-cabang');
+                });
             });
 
             Route::middleware('cek-admin-pemilik')->group(function () {
