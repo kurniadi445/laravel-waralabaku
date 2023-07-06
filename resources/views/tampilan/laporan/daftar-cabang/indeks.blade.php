@@ -42,3 +42,6 @@
     </div>
     {{-- kartu --}}
 @endsection
+@push('js')
+    <script src="{{ asset('js/laporan/daftar-cabang/ekspor.js') }}"></script>
+@endpush
