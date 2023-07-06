@@ -94,6 +94,8 @@ Route::middleware('auth')->group(function () {
                 Route::prefix('daftar-cabang')->group(function () {
                     Route::get('/', [DaftarCabangController::class, 'indeks'])->name('daftar-cabang');
                     Route::get('/ekspor', [DaftarCabangController::class, 'ekspor'])->name('daftar-cabang.ekspor');
+                    Route::get('/lokasi/{uuid}', [DaftarCabangController::class, 'lokasi'])->whereUuid('uuid')->name('daftar-cabang.lokasi');
+                    Route::get('/lokasi/{uuid}/data', [DaftarCabangController::class, 'dataLokasi'])->whereUuid('uuid')->name('daftar-cabang.lokasi.data');
                 });
             });
 
