@@ -23,17 +23,12 @@ class DasborController extends Controller
     {
         $pengguna = Auth::user();
 
+        $idPengguna = $pengguna->getAuthIdentifier();
         $level = $pengguna->{'level'};
 
-        if ($level === 'Cabang') {
-            $idPengguna = $pengguna->getAuthIdentifier();
-        } else {
-            $idPengguna = null;
-        }
-
-        $pendapatanBulanan = $this->dasborRepository->pendapatanBulanan($idPengguna);
-        $pendapatanHarian = $this->dasborRepository->pendapatanHarian($idPengguna);
-        $transaksi = $this->dasborRepository->transaksi($idPengguna);
+        $pendapatanBulanan = $this->dasborRepository->pendapatanBulanan($idPengguna, $level);
+        $pendapatanHarian = $this->dasborRepository->pendapatanHarian($idPengguna, $level);
+        $transaksi = $this->dasborRepository->transaksi($idPengguna, $level);
 
         return view('tampilan.dasbor', [
             'pendapatan_bulanan' => $pendapatanBulanan,
@@ -46,27 +41,22 @@ class DasborController extends Controller
     {
         $pengguna = Auth::user();
 
+        $idPengguna = $pengguna->getAuthIdentifier();
         $level = $pengguna->{'level'};
-
-        if ($level === 'Cabang') {
-            $idPengguna = $pengguna->getAuthIdentifier();
-        } else {
-            $idPengguna = null;
-        }
 
         $tipe = urldecode($request->query('tipe'));
 
         if ($tipe === 'ringkasan pendapatan') {
-            $ringkasanPendapatan = $this->dasborRepository->ringkasanPendapatan($idPengguna);
+            $ringkasanPendapatan = $this->dasborRepository->ringkasanPendapatan($idPengguna, $level);
 
             return response()->json($ringkasanPendapatan);
         } elseif ($tipe === 'sumber pendapatan') {
-            $sumberPendapatan = $this->dasborRepository->sumberPendapatan($idPengguna);
+            $sumberPendapatan = $this->dasborRepository->sumberPendapatan($idPengguna, $level);
 
             return response()->json($sumberPendapatan);
         }
 
-        $lokasiCabang = $this->dasborRepository->lokasiCabang($idPengguna);
+        $lokasiCabang = $this->dasborRepository->lokasiCabang($idPengguna, $level);
 
         return response()->json($lokasiCabang);
     }
