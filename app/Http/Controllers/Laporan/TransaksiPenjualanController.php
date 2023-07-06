@@ -26,18 +26,13 @@ class TransaksiPenjualanController extends Controller
     {
         $pengguna = Auth::user();
 
+        $idPengguna = $pengguna->getAuthIdentifier();
         $level = $pengguna->{'level'};
-
-        if ($level === 'Cabang') {
-            $idPengguna = $pengguna->getAuthIdentifier();
-        } else {
-            $idPengguna = null;
-        }
 
         $tanggalMulai = $request->query('tanggal-mulai');
         $tanggalAkhir = $request->query('tanggal-akhir');
 
-        return $this->transaksiPenjualanRepository->cariSemua($idPengguna, $tanggalMulai, $tanggalAkhir);
+        return $this->transaksiPenjualanRepository->cariSemua($idPengguna, $level, $tanggalMulai, $tanggalAkhir);
     }
 
     public function indeks(Request $request): View|\Illuminate\Foundation\Application|Factory|Application

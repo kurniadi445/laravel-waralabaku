@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class DasborRepository
 {
-    public function whereCabang(Builder $builder, $idPengguna, $level): Builder
+    public static function whereCabang(Builder $builder, $idPengguna, $level): Builder
     {
         if ($level === 'Pemilik') {
             $builder = $builder->whereIn(DB::raw('json_extract(cabang, \'$.id_cabang\')'), function (Builder $builder) use ($idPengguna) {
