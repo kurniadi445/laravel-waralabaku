@@ -89,7 +89,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/ekspor', [TransaksiPenjualanController::class, 'ekspor'])->name('transaksi-penjualan.ekspor');
             });
 
-            Route::middleware('cek-admin')->group(function () {
+            Route::middleware('cek-admin-pemilik')->group(function () {
                 Route::prefix('kinerja-cabang')->group(function () {
                     Route::get('/', [KinerjaCabangController::class, 'indeks'])->name('kinerja-cabang');
                     Route::get('/ekspor', [KinerjaCabangController::class, 'ekspor'])->name('kinerja-cabang.ekspor');

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CekAdmin;
+use App\Http\Middleware\CekAdminPemilik;
 use App\Http\Middleware\CekCabang;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -67,6 +68,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cek-admin' => CekAdmin::class,
-        'cek-cabang' => CekCabang::class
+        'cek-cabang' => CekCabang::class,
+        'cek-admin-pemilik' => CekAdminPemilik::class
     ];
 }
