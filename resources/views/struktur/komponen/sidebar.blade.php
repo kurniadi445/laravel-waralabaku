@@ -74,12 +74,6 @@
     </li>
     @if ($level === 'Pemilik')
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fa-box fas"></i>
-                <span>Daftar Stok</span>
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="{{ route('laporan.daftar-cabang') }}">
                 <i class="fa-boxes fas"></i>
                 <span>Daftar Cabang</span>
