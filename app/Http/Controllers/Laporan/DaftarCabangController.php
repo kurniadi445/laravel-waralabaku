@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DaftarCabangController extends Controller
 {
@@ -42,5 +43,36 @@ class DaftarCabangController extends Controller
         ]);
 
         return $pdf->stream();
+    }
+
+    public function lokasi($uuid)
+    {
+        $idPengguna = Auth::user()->getAuthIdentifier();
+
+        $daftarCabang = $this->daftarCabangRepository->cariSatuBerdasarkanUUIDIDPengguna($uuid, $idPengguna);
+
+        if ($daftarCabang) {
+            return view('tampilan.laporan.daftar-cabang.lokasi', [
+                'daftar_cabang' => $daftarCabang
+            ]);
+        }
+
+        abort(404);
+    }
+
+    public function dataLokasi($uuid)
+    {
+        $idPengguna = Auth::user()->getAuthIdentifier();
+
+        $daftarCabang = $this->daftarCabangRepository->cariSatuBerdasarkanUUIDIDPengguna($uuid, $idPengguna, [
+            DB::raw('st_x(koordinat) garis_bujur'),
+            DB::raw('st_y(koordinat) garis_lintang')
+        ]);
+
+        if ($daftarCabang) {
+            return response()->json($daftarCabang);
+        }
+
+        abort(403);
     }
 }
