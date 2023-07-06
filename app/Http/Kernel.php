@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\CekAdmin;
 use App\Http\Middleware\CekAdminPemilik;
 use App\Http\Middleware\CekCabang;
+use App\Http\Middleware\CekPemilik;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cek-admin' => CekAdmin::class,
         'cek-cabang' => CekCabang::class,
+        'cek-pemilik' => CekPemilik::class,
         'cek-admin-pemilik' => CekAdminPemilik::class
     ];
 }
