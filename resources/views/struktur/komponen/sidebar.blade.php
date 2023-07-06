@@ -80,7 +80,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('laporan.daftar-cabang') }}">
                 <i class="fa-boxes fas"></i>
                 <span>Daftar Cabang</span>
             </a>
