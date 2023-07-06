@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
             Route::middleware('cek-pemilik')->group(function () {
                 Route::prefix('daftar-cabang')->group(function () {
                     Route::get('/', [DaftarCabangController::class, 'indeks'])->name('daftar-cabang');
+                    Route::get('/ekspor', [DaftarCabangController::class, 'ekspor'])->name('daftar-cabang.ekspor');
                 });
             });
 
