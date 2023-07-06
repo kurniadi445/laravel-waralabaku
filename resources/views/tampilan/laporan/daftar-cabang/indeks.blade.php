@@ -27,7 +27,7 @@
                             <td class="text-center">{{ $d->no }}</td>
                             <td>{{ $d->nama_cabang }}</td>
                             <td>{{ $d->alamat }}</td>
-                            <td class="text-center"><a class="btn btn-outline-secondary btn-sm" href="#">Cek</a></td>
+                            <td class="text-center"><a class="btn btn-outline-secondary btn-sm" href="{{ route('laporan.daftar-cabang.lokasi', ['uuid' => $d->uuid_teks]) }}">Cek</a></td>
                         </tr>
                     @empty
                         <tr class="text-center">
